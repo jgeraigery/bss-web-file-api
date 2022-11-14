@@ -4,7 +4,12 @@ from uuid import UUID
 from fastapi import APIRouter, Response, UploadFile, status
 
 from app.models.member import Member
-from app.services.member import member_path, create_folder_structure, create_thumbnails, update_symlinks
+from app.services.member import (
+    create_folder_structure,
+    create_thumbnails,
+    member_path,
+    update_symlinks,
+)
 
 router = APIRouter(tags=["Member"])
 

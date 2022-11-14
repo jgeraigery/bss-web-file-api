@@ -4,7 +4,13 @@ from fastapi import APIRouter, UploadFile
 from starlette import status
 from starlette.responses import Response
 
-from app.services.video import Video, long_video_path, update_symlinks, create_thumbnails, create_folder_structure
+from app.services.video import (
+    Video,
+    create_folder_structure,
+    create_thumbnails,
+    long_video_path,
+    update_symlinks,
+)
 
 router = APIRouter(tags=["Video"])
 
