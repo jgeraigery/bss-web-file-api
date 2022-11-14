@@ -1,7 +1,9 @@
 from uuid import UUID
+
 from fastapi import APIRouter, UploadFile
 from starlette import status
 from starlette.responses import Response
+
 from app.services.video import Video, long_video_path, update_symlinks, create_thumbnails, create_folder_structure
 
 router = APIRouter(tags=["Video"])

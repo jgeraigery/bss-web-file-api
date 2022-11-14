@@ -1,7 +1,7 @@
 import re
 from uuid import UUID
 
-from fastapi import APIRouter, UploadFile, status, Response
+from fastapi import APIRouter, Response, UploadFile, status
 
 from app.models.member import Member
 from app.services.member import member_path, create_folder_structure, create_thumbnails, update_symlinks
@@ -29,7 +29,9 @@ def update_member_folder(member: Member):
 @router.post("/api/v1/member/{member_id}/image", response_model=UUID)
 async def upload_member_picture(member_id: UUID, file: UploadFile):
     if not re.match("image/.+", file.content_type):
-        return Response("Mime is not an image format", status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(
+            "Mime is not an image format", status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
     content = await file.read()
     create_thumbnails(content, member_id)

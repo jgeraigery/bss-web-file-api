@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from .routers import video, member
 
+from .routers import member, video
 
 app = FastAPI()
 
