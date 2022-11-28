@@ -6,13 +6,19 @@ executors:
     docker:
       - image: cimg/python:3.11.0
 jobs:
-  install:
+  lint:
     executor: python
     steps:
       - checkout
       - python/install-packages:
           pkg-manager: poetry
+      - run: poetry run isort . --check
+      - run: poetry run black --check .
+      - run: poetry run mypy -p src.bss_web_file_server
 workflows:
   app:
     jobs:
-      - install
+      - lint
+      - python/test:
+          pkg-manager: poetry
+          test-tool: pytest

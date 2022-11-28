@@ -3,11 +3,11 @@ from io import BytesIO
 from pathlib import Path
 from uuid import UUID
 
-import pillow_avif
+import pillow_avif  # type: ignore
 from PIL import Image
 
-from bss_web_file_server.config import settings
-from bss_web_file_server.models.member import Member
+from src.bss_web_file_server.config import settings
+from src.bss_web_file_server.models.member import Member
 
 ImgFormat = namedtuple("ImgFormat", ["width", "height", "name"])
 short_path = Path(settings.server_base_path, "m")
