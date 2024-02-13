@@ -1,11 +1,11 @@
-FROM python:3.11.0-alpine3.16 as builder
+FROM python:3.12.2-alpine as builder
 WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 COPY requirements.txt ./
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir ./wheels -r requirements.txt
 
-FROM python:3.11.0-alpine3.16
+FROM python:3.12.2-alpine
 
 COPY --from=builder /app/wheels /wheels
 COPY --from=builder /app/requirements.txt .
