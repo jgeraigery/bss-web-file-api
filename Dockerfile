@@ -1,20 +1,17 @@
-FROM python:3.12.2-alpine as builder
+FROM python:3.12.2 as poetry
+RUN pip install poetry==1.7.1
+
+FROM poetry
 WORKDIR /app
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-COPY requirements.txt ./
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir ./wheels -r requirements.txt
 
-FROM python:3.12.2-alpine
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --no-root --no-directory
 
-COPY --from=builder /app/wheels /wheels
-COPY --from=builder /app/requirements.txt .
+COPY ./src/ ./src
+COPY ./README.md ./
+RUN poetry install --only=main
 
-RUN pip install --no-cache /wheels/*
-
-COPY ./src ./src
-
-RUN mkdir -p /usr/share/bss/{m,member,v,video}
-ENV SERVER_BASE_PATH="/usr/share/bss"
+RUN mkdir -p /data/{m,member,v,video}
+ENV SERVER_BASE_PATH="/data"
 
 CMD ["uvicorn", "src.bss_web_file_server.main:app", "--host", "0.0.0.0", "--port", "80"]
