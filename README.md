@@ -32,7 +32,7 @@ uvicorn src.bss_web_file_server.main:app
 ```shell
 poetry run isort . --check
 poetry run black . --check
-poetry run mypy -p src.bss_web_file_server
+poetry run mypy
 ```
 
 #### Apply lint
