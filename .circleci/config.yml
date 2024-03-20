@@ -31,7 +31,8 @@ jobs:
           pkg-manager: poetry
       - run: poetry run isort . --check
       - run: poetry run black . --check
-      - run: poetry run mypy -p src.bss_web_file_server
+      - run: poetry run pylint src
+      - run: poetry run mypy -p src
   verify-requirements:
     executor: python
     steps:
@@ -50,11 +51,22 @@ jobs:
       - github-cli/setup:
           version: 2.43.1
       - run: gh release create << pipeline.git.tag >> -t << pipeline.git.tag >> --generate-notes
+  coverage:
+    executor: python
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: poetry
+      - run: poetry run pytest --cov=src  --cov-report=html --cov-fail-under=100
+      - store_artifacts:
+          path: htmlcov
 workflows:
   Build:
     jobs:
       - lint:
           name: Lint
+      - coverage:
+          name: Coverage
       - verify-requirements:
           name: Verify requirements.txt
       - python/test:

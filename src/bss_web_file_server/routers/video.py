@@ -5,15 +5,11 @@ from uuid import UUID
 
 from fastapi import APIRouter, Response, UploadFile, status
 
-from ..services.video import (
-    Video,
-    create_folder_structure,
-    create_thumbnails,
-    to_id_path,
-    update_symlinks,
-)
+from ..models.video import Video
+from ..services.video import VideoService
 
 router = APIRouter(tags=["Video"], prefix="/api/v1/video")
+service: VideoService = VideoService()
 
 
 @router.post("", response_model=Video)
@@ -23,7 +19,7 @@ def create_video_folder(video: Video):
     :param video: Video object
     :return: 200 and the original video object
     """
-    create_folder_structure(video)
+    service.create_folder_structure(video)
     return video
 
 
@@ -35,9 +31,9 @@ def update_video_folder(video: Video):
     :param video: Video object
     :return: 200 and the original video object
     """
-    if not to_id_path(video.id).exists():
+    if not service.to_id_path(video.id).exists():
         return Response(status_code=status.HTTP_404_NOT_FOUND)
-    update_symlinks(video)
+    service.update_symlinks(video)
     return video
 
 
@@ -52,15 +48,15 @@ async def upload_video_poster(video_id: UUID, file: UploadFile):
     :param file: the image file
     :return: 200 and the original video_id
     """
-    if not to_id_path(video_id).exists():
-        return Response(status_code=status.HTTP_404_NOT_FOUND)
     # pylint: disable=duplicate-code
+    if not service.to_id_path(video_id).exists():
+        return Response(status_code=status.HTTP_404_NOT_FOUND)
     if file.content_type is not None and not re.match("image/.+", file.content_type):
         return Response(
             content="Mime is not an image format",
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
-    # pylint: enable=duplicate-code
     file_content = await file.read()
-    create_thumbnails(file_content, video_id)
+    # pylint: enable=duplicate-code
+    service.create_thumbnails(file_content, video_id)
     return video_id
