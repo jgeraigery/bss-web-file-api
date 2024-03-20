@@ -1,6 +1,6 @@
-FROM python:3.12 AS builder
+FROM python:3.12 AS builder-base
 
-WORKDIR /builder
+WORKDIR /app
     # python
 ENV PYTHONUNBUFFERED=1 \
     # prevents python creating .pyc files
@@ -10,8 +10,15 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on
 
-COPY ./requirements.txt ./
+FROM builder-base AS lock
 
+RUN pip install --no-cache-dir poetry==1.8.2
+COPY ./pyproject.toml ./poetry.lock ./
+RUN poetry export  --output requirements.txt
+
+FROM builder-base AS builder
+
+COPY --from=lock /app/requirements.txt ./
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir ./wheels -r requirements.txt
 
 FROM python:3.12-slim AS app
@@ -19,7 +26,6 @@ FROM python:3.12-slim AS app
 RUN adduser --system --group --home /home/nonroot nonroot
 ENV PATH="/home/nonroot/.local/bin:${PATH}"
 USER nonroot:nonroot
-
 WORKDIR /home/nonroot/app
 
     # python
@@ -31,8 +37,8 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on
 
-COPY --from=builder /builder/wheels ./wheels
-COPY --from=builder /builder/requirements.txt ./
+COPY --from=builder /app/wheels ./wheels
+COPY --from=builder /app/requirements.txt ./
 
 RUN pip install --no-cache-dir ./wheels/*
 
