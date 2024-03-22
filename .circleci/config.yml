@@ -8,6 +8,10 @@ executors:
   python:
     docker:
       - image: cimg/python:3.12.2
+  python-machine:
+    machine:
+      docker_layer_caching: true
+      image: ubuntu-2204:edge
 defaults:
   docker_publish: &docker_publish
     image: bsstudio/bss-web-file-api
@@ -34,6 +38,29 @@ jobs:
       - run: poetry run black . --check
       - run: poetry run pylint src
       - run: poetry run mypy -p src
+  coverage:
+    executor: python
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: poetry
+      - run: |
+          poetry run pytest tests --cov=src \
+          --cov-fail-under=100 \
+          --cov-report=html \
+          --cov-report json
+      - codecov/upload
+      - store_artifacts:
+          path: htmlcov
+  integration:
+    executor: python-machine
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: poetry
+          pre-install-steps:
+            - run: pip install poetry
+      - run: poetry run pytest tests-int
   github_release:
     docker:
       - image: cimg/base:stable
@@ -44,20 +71,6 @@ jobs:
       - github-cli/setup:
           version: 2.43.1
       - run: gh release create << pipeline.git.tag >> -t << pipeline.git.tag >> --generate-notes
-  coverage:
-    executor: python
-    steps:
-      - checkout
-      - python/install-packages:
-          pkg-manager: poetry
-      - run: |
-          poetry run pytest --cov=src \
-          --cov-fail-under=100 \
-          --cov-report=html \
-          --cov-report json
-      - codecov/upload
-      - store_artifacts:
-          path: htmlcov
 workflows:
   Build:
     jobs:
@@ -68,8 +81,10 @@ workflows:
       - python/test:
           name: Unit tests
           pkg-manager: poetry
-          test-tool: pytest
+          test-tool-args: tests
           version: 3.12.2
+      - integration:
+          name: Integration tests
       - docker/hadolint:
           name: Lint Dockerfile
       - docker/publish:
