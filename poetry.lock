@@ -1332,13 +1332,13 @@ windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
 name = "pylint"
-version = "3.3.8"
+version = "3.3.9"
 description = "python code static checker"
 optional = false
 python-versions = ">=3.9.0"
 files = [
-    {file = "pylint-3.3.8-py3-none-any.whl", hash = "sha256:7ef94aa692a600e82fabdd17102b73fc226758218c97473c7ad67bd4cb905d83"},
-    {file = "pylint-3.3.8.tar.gz", hash = "sha256:26698de19941363037e2937d3db9ed94fb3303fdadf7d98847875345a8bb6b05"},
+    {file = "pylint-3.3.9-py3-none-any.whl", hash = "sha256:01f9b0462c7730f94786c283f3e52a1fbdf0494bbe0971a78d7277ef46a751e7"},
+    {file = "pylint-3.3.9.tar.gz", hash = "sha256:d312737d7b25ccf6b01cc4ac629b5dcd14a0fcf3ec392735ac70f137a9d5f83a"},
 ]
 
 [package.dependencies]
@@ -1614,13 +1614,13 @@ full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart (>=0.0.7
 
 [[package]]
 name = "testcontainers"
-version = "4.13.0"
+version = "4.13.3"
 description = "Python library for throwaway instances of anything that can run in a Docker container"
 optional = false
-python-versions = "<4.0,>=3.9"
+python-versions = ">=3.9.2"
 files = [
-    {file = "testcontainers-4.13.0-py3-none-any.whl", hash = "sha256:784292e0a3f3a4588fbbf5d6649adda81fea5fd61ad3dc73f50a7a903904aade"},
-    {file = "testcontainers-4.13.0.tar.gz", hash = "sha256:ee2bc39324eeeeb710be779208ae070c8373fa9058861859203f536844b0f412"},
+    {file = "testcontainers-4.13.3-py3-none-any.whl", hash = "sha256:063278c4805ffa6dd85e56648a9da3036939e6c0ac1001e851c9276b19b05970"},
+    {file = "testcontainers-4.13.3.tar.gz", hash = "sha256:9d82a7052c9a53c58b69e1dc31da8e7a715e8b3ec1c4df5027561b47e2efe646"},
 ]
 
 [package.dependencies]
@@ -1635,26 +1635,25 @@ arangodb = ["python-arango (>=7.8,<8.0)"]
 aws = ["boto3", "httpx"]
 azurite = ["azure-storage-blob (>=12.19,<13.0)"]
 chroma = ["chromadb-client (>=1.0.0,<2.0.0)"]
-clickhouse = ["clickhouse-driver"]
 cosmosdb = ["azure-cosmos"]
 db2 = ["ibm_db_sa", "sqlalchemy"]
 generic = ["httpx", "redis"]
 google = ["google-cloud-datastore (>=2)", "google-cloud-pubsub (>=2)"]
 influxdb = ["influxdb", "influxdb-client"]
-k3s = ["kubernetes", "pyyaml"]
+k3s = ["kubernetes", "pyyaml (>=6.0.3)"]
 keycloak = ["python-keycloak"]
 localstack = ["boto3"]
 mailpit = ["cryptography"]
 minio = ["minio"]
 mongodb = ["pymongo"]
-mssql = ["pymssql", "sqlalchemy"]
+mssql = ["pymssql (>=2.3.9)", "sqlalchemy"]
 mysql = ["pymysql[rsa]", "sqlalchemy"]
 nats = ["nats-py"]
 neo4j = ["neo4j"]
 openfga = ["openfga-sdk"]
 opensearch = ["opensearch-py"]
-oracle = ["oracledb", "sqlalchemy"]
-oracle-free = ["oracledb", "sqlalchemy"]
+oracle = ["oracledb (>=3.4.1)", "sqlalchemy"]
+oracle-free = ["oracledb (>=3.4.1)", "sqlalchemy"]
 qdrant = ["qdrant-client"]
 rabbitmq = ["pika"]
 redis = ["redis"]
@@ -1809,13 +1808,13 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "uvicorn"
-version = "0.35.0"
+version = "0.38.0"
 description = "The lightning-fast ASGI server."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "uvicorn-0.35.0-py3-none-any.whl", hash = "sha256:197535216b25ff9b785e29a0b79199f55222193d47f820816e7da751e9bc8d4a"},
-    {file = "uvicorn-0.35.0.tar.gz", hash = "sha256:bc662f087f7cf2ce11a1d7fd70b90c9f98ef2e2831556dd078d131b96cc94a01"},
+    {file = "uvicorn-0.38.0-py3-none-any.whl", hash = "sha256:48c0afd214ceb59340075b4a052ea1ee91c16fbc2a9b1469cca0e54566977b02"},
+    {file = "uvicorn-0.38.0.tar.gz", hash = "sha256:fd97093bdd120a2609fc0d3afe931d4d4ad688b6e75f0f929fde1bc36fe0e91d"},
 ]
 
 [package.dependencies]
@@ -2146,4 +2145,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "61c6cf3182bf0520e1f954d7be8e5dfdba661b03bd059e2141dea08b215a93df"
+content-hash = "0af48f044bff9cbba976ae5fd79c2c3e8c4b984a0a878c027b81c1c42d7aa707"
