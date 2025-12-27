@@ -1426,13 +1426,13 @@ cli = ["click (>=5.0)"]
 
 [[package]]
 name = "python-multipart"
-version = "0.0.10"
+version = "0.0.21"
 description = "A streaming multipart parser for Python"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.10"
 files = [
-    {file = "python_multipart-0.0.10-py3-none-any.whl", hash = "sha256:2b06ad9e8d50c7a8db80e3b56dab590137b323410605af2be20d62a5f1ba1dc8"},
-    {file = "python_multipart-0.0.10.tar.gz", hash = "sha256:46eb3c6ce6fdda5fb1a03c7e11d490e407c6930a2703fe7aef4da71c374688fa"},
+    {file = "python_multipart-0.0.21-py3-none-any.whl", hash = "sha256:cf7a6713e01c87aa35387f4774e812c4361150938d20d232800f75ffcf266090"},
+    {file = "python_multipart-0.0.21.tar.gz", hash = "sha256:7137ebd4d3bbf70ea1622998f902b97a29434a9e8dc40eb203bbcf7c2a2cba92"},
 ]
 
 [[package]]
@@ -1809,13 +1809,13 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "uvicorn"
-version = "0.35.0"
+version = "0.40.0"
 description = "The lightning-fast ASGI server."
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 files = [
-    {file = "uvicorn-0.35.0-py3-none-any.whl", hash = "sha256:197535216b25ff9b785e29a0b79199f55222193d47f820816e7da751e9bc8d4a"},
-    {file = "uvicorn-0.35.0.tar.gz", hash = "sha256:bc662f087f7cf2ce11a1d7fd70b90c9f98ef2e2831556dd078d131b96cc94a01"},
+    {file = "uvicorn-0.40.0-py3-none-any.whl", hash = "sha256:c6c8f55bc8bf13eb6fa9ff87ad62308bbbc33d0b67f84293151efe87e0d5f2ee"},
+    {file = "uvicorn-0.40.0.tar.gz", hash = "sha256:839676675e87e73694518b5574fd0f24c9d97b46bea16df7b8c05ea1a51071ea"},
 ]
 
 [package.dependencies]
@@ -2146,4 +2146,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "86c9b0bb99c7ca9b51df5b6402fc6a6e60e94c6a6a4abfde8bc03833880d9a7e"
+content-hash = "f303e28e227c9d1220ee1a8bcf77a797b55b6885286e5b63a24709b1e09fba4c"
