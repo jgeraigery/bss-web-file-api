@@ -21,7 +21,7 @@ uvicorn = {version = "0.40.0", extras = ["standard"]}
 
 [tool.poetry.group.dev.dependencies]
 black = "24.10.0"
-isort = "5.13.2"
+isort = "7.0.0"
 mypy = "1.19.1"
 pylint = "3.3.9"
 pre-commit = "3.8.0"
