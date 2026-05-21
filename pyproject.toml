@@ -20,7 +20,7 @@ requests = "2.34.0"
 uvicorn = {version = "0.42.0", extras = ["standard"]}
 
 [tool.poetry.group.dev.dependencies]
-black = "24.10.0"
+black = "26.5.1"
 isort = "5.13.2"
 mypy = "1.19.1"
 pylint = "3.3.9"
