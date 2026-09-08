@@ -15,7 +15,7 @@ pillow = "11.3.0"
 pillow-avif-plugin = "1.4.6"
 python = "^3.12"
 # used for UploadFile
-python-multipart = "0.0.10"
+python-multipart = "0.0.27"
 requests = "2.34.2"
 uvicorn = {version = "0.52.4", extras = ["standard"]}
 
